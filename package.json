@@ -1,0 +1,21 @@
+{
+  "name": "lt-cogacc-fe-tech-challenge",
+  "version": "1.0.0",
+  "description": "cognizant accelerator fe tech challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "client": "node start-client.js"
+  },
+  "author": "Laura Turk",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "node-fetch": "^1.7.2"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  }
+}
