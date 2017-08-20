@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+
 import './App.css';
 import CurrentConditions from './CurrentConditions'
+import Map from './Map.js'
+import fetchConditions from './fetch_helper'
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      location: [40.016457, -105.285884],
+      location: {
+        lng: -105.285884,
+        lat: 40.016457
+      },
       condition: '',
       temp: '',
       summary: ''
@@ -14,30 +20,30 @@ class App extends Component {
   }
 
   componentDidMount() {
-    return fetch('/api/v1/current_temp', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        lat: this.state.location[0],
-        long: this.state.location[1]
-      })
-    })
-    .then(response => {
-      if(response.ok){
-        return response.json()
-      }
-      // throw new Error('bad response')
-    })
-    .then(conditionsData => {
-      const current = conditionsData.currently
+    fetchConditions(this.state.location)
+      .then(conditionObject => {
+        const { condition, temp, summary } = conditionObject
 
-      return this.setState({
-        condition: current.icon,
-        temp: current.temperature,
-        summary: current.summary
+        this.setState({
+          condition,
+          temp,
+          summary
+        });
       })
+  }
+
+  setNewLocation(location) {
+    fetchConditions(location)
+    .then(conditionObject => {
+      const { condition, temp, summary } = conditionObject
+
+      this.setState({
+        location,
+        condition,
+        temp,
+        summary
+      });
     })
-    .catch(error => console.log(error))
   }
 
   render () {
@@ -46,6 +52,7 @@ class App extends Component {
         <CurrentConditions condition={this.state.condition}
           summary={this.state.summary}
           temp={this.state.temp} />
+        <Map setNewLocation={this.setNewLocation.bind(this)}/>
       </div>
     )
   }
