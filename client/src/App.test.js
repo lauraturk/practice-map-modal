@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import fetchMock from 'fetch-mock';
 
 import App from './App';
-import { resolveAfter2Seconds, mockFetchCalls } from './test_helper';
+import { resolveAfter2Seconds, mockFetchCalls } from './helpers/test_helper';
 
 describe('App Test', () => {
   let wrapper;
@@ -28,7 +28,7 @@ describe('App Test', () => {
     expect(wrapper.state().location).toEqual([40.016457, -105.285884])
   });
 
-  it.only('sets the current conditions in state', async () => {
+  it('sets the current conditions in state', async () => {
     mockFetchCalls();
 
     await resolveAfter2Seconds();
@@ -36,6 +36,4 @@ describe('App Test', () => {
     expect(wrapper.state().summary).toEqual("clear-day");
     expect(wrapper.state().temp).toEqual(83.29);
   });
-
-  it('')
 });

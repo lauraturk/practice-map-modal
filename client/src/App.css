@@ -1,47 +1,15 @@
 .App-wrapper {
+  background-color: #2F4F4F;
+  color: white;
+  display: grid;
+  font-family: 'Roboto', sans-serif;
+  grid-template-columns: 2% 96% 2%;
+  grid-template-rows: 20% 70% 10%;
   height: 100vh;
+  position: relative;
   width: 100%;
 }
 
-.clear-day {
-  color: #191970;
-  background: url('/assets/alex-martinez-42902.jpg') #87CEEB no-repeat 0 0;
-  background-size: cover;
-}
-
-.clear-night {
-  color: #FFFAFA;
-  background: url('/assets/nathan-anderson-82317.jpg') #2F4F4F no-repeat 0 0;
-  background-size: cover;
-}
-
-.rain {
-  color: #FFFAFA;
-  background: url('/assets/veeterzy-60201.jpg') #2F4F4F no-repeat 0 0;
-  background-size: cover;
-}
-
-.snow {
-
-}
-
-.sleet {
-
-}
-
-.wind {
-}
-
-.fog {
-  color: #FFFAFA;
-  background: url('/assets/seth-williams-1517.jpg') #2F4F4F no-repeat 0 0;
-  background-size: cover;
-}
-
-.cloudy, .partly-cloudy-day {
-
-}
-
-.partly-cloudy-night {
-
+.hidden {
+  display: none;
 }
