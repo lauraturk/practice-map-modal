@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import './App.css';
 import CurrentConditions from './CurrentConditions';
 import Map from './Map.js';
+import MapDirections from './MapDirections'
 import fetchConditions from './helpers/fetch_helper';
 import * as images from './helpers/image_helper';
+import * as icons from './helpers/icon_helper';
 
 class App extends Component {
   constructor() {
@@ -83,14 +85,18 @@ class App extends Component {
 
   render () {
     return (
-      <div className='App-wrapper' style={this.imageBackground()}>
+      <div className={`App-wrapper ${this.state.condition}`} style={this.imageBackground()}>
+        <header className='App-header'>
+          <h1 className='App-logo'>adventure <div className='App-logoIcon'>{icons.compass}</div> weather</h1>
+          <CurrentConditions condition={this.state.condition}
+            summary={this.state.summary}
+            temp={this.state.temp} />
+          <MapDirections />
+        </header>
         <img className='hidden'
           onLoad={this.setLoad.bind(this)}
           src={this.getImage()}
           alt={`landscape with ${this.state.condition}`}/>
-        <CurrentConditions condition={this.state.condition}
-          summary={this.state.summary}
-          temp={this.state.temp} />  
         <Map setNewLocation={this.setNewLocation.bind(this)} defaultLocation={this.state.location}/>
       </div>
     )

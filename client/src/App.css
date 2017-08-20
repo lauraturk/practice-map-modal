@@ -4,12 +4,52 @@
   display: grid;
   font-family: 'Roboto', sans-serif;
   grid-template-columns: 2% 96% 2%;
-  grid-template-rows: 20% 70% 10%;
+  grid-template-rows: 150px 70% 10%;
   height: 100vh;
-  position: relative;
+  position: fixed;
   width: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.App-wrapper::after {
+  background-color: rgba(112,128,144 ,.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 
 .hidden {
   display: none;
+}
+
+.App-header {
+  height: 150px;
+  grid-column: 1/4;
+  grid-row: 1/2;
+  display: flex;
+  justify-content: space-around;
+}
+
+.App-logo {
+  /*font-family: 'Old Standard TT', serif;*/
+  grid-column: 2/3;
+  min-width: 300px;
+  text-transform: uppercase;
+}
+
+.App-logoIcon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60px;
+  height: 60px;
+  margin: 0 -.5em;
+}
+
+.rain, .snow, .fog {
+  color: darkslategrey;
 }
