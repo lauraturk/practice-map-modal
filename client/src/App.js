@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import CurrentConditions from './CurrentConditions'
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       location: [40.016457, -105.285884],
-      summary: '',
-      temp: ''
+      condition: '',
+      temp: '',
+      summary: ''
     }
   }
 
@@ -27,10 +29,12 @@ class App extends Component {
       // throw new Error('bad response')
     })
     .then(conditionsData => {
-      console.log(conditionsData);
+      const current = conditionsData.currently
+
       return this.setState({
-        summary: conditionsData.currently.icon,
-        temp: conditionsData.currently.temperature
+        condition: current.icon,
+        temp: current.temperature,
+        summary: current.summary
       })
     })
     .catch(error => console.log(error))
@@ -38,7 +42,11 @@ class App extends Component {
 
   render () {
     return (
-      <div className='App-wrapper'>Hello!</div>
+      <div className={`App-wrapper ${this.state.condition}`}>
+        <CurrentConditions condition={this.state.condition}
+          summary={this.state.summary}
+          temp={this.state.temp} />
+      </div>
     )
   }
 };
