@@ -8,7 +8,7 @@ to start both the client side and express server
 
 ## Screen Shot:
 ![screen shot on a clear day](http://i.imgur.com/WFmzCAu.png)
-![screen shot of a cloudy day](http://recordit.co/lpxoJmotHK)
+![screen shot of a cloudy day](http://i.imgur.com/Inf92ap.png)
 ![gif of modal and happy lemon](http://g.recordit.co/lpxoJmotHK.gif)
 
 ### Credit
