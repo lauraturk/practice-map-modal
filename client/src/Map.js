@@ -65,7 +65,7 @@ class Map extends Component {
 
     map.on('click', (e) => {
       this.props.setNewLocation(e.lngLat)
-      map.flyTo({center: e.lngLat, zoom: 8})
+      map.flyTo({center: e.lngLat, zoom: 15})
     });
 
     map.on('click', 'points', (e) => {

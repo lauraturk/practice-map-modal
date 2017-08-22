@@ -4,13 +4,15 @@
 `npm start`
 to start both the client side and express server
 
-### to run tests
-`$ cd client npm test`
-to run tests. If you get an error about watching, you may need to reinstall npm
-
-
+## Screen Shot:
 
 ### Credit
+#### Weather
+[Darksky API](https://darksky.net/dev)
+
+#### Map
+[MapBox - NorthStar Style](https://www.mapbox.com/)
+
 #### Photos:
 * Nathan Anderson on Unsplash
 * Seth Williams on Unsplash
