@@ -1,0 +1,26 @@
+.CurrentConditions-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  min-width: 300px;
+}
+
+.CurrentConditions-temp, .CurrentConditions-summary {
+  display: block;
+}
+
+.CurrentConditions-temp {
+  font-size: 3em;
+  margin: 0;
+}
+
+.CurrentConditions-summary {
+  margin: 0;
+}
+
+@media (max-width: 700px)  {
+  .CurrentConditions-wrapper {
+    justify-content: space-around;
+    margin: 20px auto;
+  }
+}

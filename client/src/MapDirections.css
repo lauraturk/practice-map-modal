@@ -1,0 +1,58 @@
+.MapDirections-wrapper {
+  font-family: 'Roboto', sans-serif;
+  margin: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.MapDirections-caption_hover {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.MapDirections-caption:hover >
+.MapDirections-caption_hover {
+  opacity: 1;
+  transition: opacity, 2s;
+}
+
+.MapDirections-caption svg:hover {
+  transform: rotate(360deg);
+  transition-duration: 1s;
+}
+
+.MapDirections-list {
+  list-style: none;
+  padding: 0;
+  text-align: justify;
+}
+
+.MapDirections-list li {
+  border-top: 1px solid rgba(225,225,225 ,.5);
+  padding: 10px;
+  margin: 10px;
+  vertical-align: middle;
+}
+
+.MapDirections-list li:first-child {
+  border-top: none;
+}
+
+.MapDirections-list svg {
+  margin:0 20px 10px 0;
+  vertical-align: -100%;
+}
+
+@media (max-width: 635px) {
+  .MapDirections-list {
+    text-align: center;
+  }
+
+  .MapDirections-wrapper svg {
+    display: block;
+    height: 50px;
+    width: 50px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+  }
+}
