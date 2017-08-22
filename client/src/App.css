@@ -50,6 +50,6 @@
   margin: 0 -.5em;
 }
 
-.rain, .snow, .fog {
+.rain, .snow, .sleet, .fog {
   color: darkslategrey;
 }
