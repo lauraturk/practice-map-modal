@@ -30,3 +30,9 @@ to start both the client side and express server
 
 #### Icons:
 Robowolf
+
+#### Addtl. Resources:
+[FullStack create-react-app w/ API](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/)
+[React modal docs](https://github.com/reactjs/react-modal)
+[Mapbox GL JS docs](https://www.mapbox.com/mapbox-gl-js/api/)
+
