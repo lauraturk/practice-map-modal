@@ -1,10 +1,15 @@
 # Laura Turk
 
+[Live Site](https://lemonade-weather.herokuapp.com/)
+
 ## Set Up:
 `npm start`
 to start both the client side and express server
 
 ## Screen Shot:
+![screen shot on a clear day](http://i.imgur.com/WFmzCAu.png)
+![screen shot of a cloudy day](http://recordit.co/lpxoJmotHK)
+![gif of modal and happy lemon](http://g.recordit.co/lpxoJmotHK.gif)
 
 ### Credit
 #### Weather
