@@ -10,6 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', process.env.PORT || 3001);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 app.post('/api/v1/current_temp', (req, res) => {
   const lat = req.body.lat;
   const long = req.body.long;
