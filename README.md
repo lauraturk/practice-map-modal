@@ -1,4 +1,4 @@
-# Laura Turk FE Dev Interview Code Challenge
+# Laura Turk
 
 ## Set Up:
 `npm start`
