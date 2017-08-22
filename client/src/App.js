@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 
 import './App.css';
 import CurrentConditions from './CurrentConditions';
@@ -7,6 +8,25 @@ import MapDirections from './MapDirections'
 import fetchConditions from './helpers/fetch_helper';
 import * as images from './helpers/image_helper';
 import * as icons from './helpers/icon_helper';
+
+const modalStyles = {
+  overlay : {
+    position          : 'fixed',
+    top               : 0,
+    left              : 0,
+    right             : 0,
+    bottom            : 0,
+    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+  },
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 class App extends Component {
   constructor() {
@@ -19,11 +39,24 @@ class App extends Component {
       condition: '',
       temp: '',
       summary: '',
-      loaded: false
-    }
-  };
+      loaded: false,
+      modalIsOpen: false
+    };
+
+    this.setOpenModal = this.setOpenModal.bind(this);
+    this.setCloseModal = this.setCloseModal.bind(this);
+  }
+
+  setOpenModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  setCloseModal() {
+    this.setState({modalIsOpen: false});
+  }
 
   componentDidMount() {
+    this.setOpenModal()
     fetchConditions(this.state.location)
       .then(conditionObject => {
         const { condition, temp, summary } = conditionObject
@@ -31,10 +64,10 @@ class App extends Component {
         this.setState({
           condition,
           temp,
-          summary
+          summary,
         });
       });
-  };
+  }
 
   setNewLocation(location) {
     fetchConditions(location)
@@ -58,7 +91,7 @@ class App extends Component {
         });
       };
     });
-  };
+  }
 
   imageBackground() {
     if(this.state.loaded) {
@@ -68,30 +101,38 @@ class App extends Component {
         'repeat': 'noRepeat'
       }
     };
-  };
+  }
 
   setLoad() {
     this.setState({
       loaded: true
     });
-  };
+  }
 
   getImage() {
     const url = Object.keys(images).find(key => {
       return key === this.state.condition
     });
     return images[url]
-  };
+  }
 
   render () {
     return (
       <div className={`App-wrapper ${this.state.condition}`} style={this.imageBackground()}>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.setCloseModal}
+          contentLabel="map directions"
+          style={modalStyles}
+          >
+          <MapDirections />
+          <div onClick={() => this.setCloseModal()}>{icons.closeIcon}</div>
+        </Modal>
         <header className='App-header'>
-          <h1 className='App-logo'>adventure <div className='App-logoIcon'>{icons.compass}</div> weather</h1>
+          <h1 className='App-logo'>Lemonade <div className='App-logoIcon'>{icons.compass}</div> Weather</h1>
           <CurrentConditions condition={this.state.condition}
             summary={this.state.summary}
             temp={this.state.temp} />
-          <MapDirections />
         </header>
         <img className='hidden'
           onLoad={this.setLoad.bind(this)}
@@ -100,8 +141,8 @@ class App extends Component {
         <Map setNewLocation={this.setNewLocation.bind(this)} defaultLocation={this.state.location}/>
       </div>
     )
-  };
-};
+  }
+}
 
 
 export default App;

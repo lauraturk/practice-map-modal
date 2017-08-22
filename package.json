@@ -14,7 +14,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "mapbox-gl": "^0.39.1",
-    "node-fetch": "^1.7.2"
+    "node-fetch": "^1.7.2",
+    "react-modal": "^2.2.4"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
