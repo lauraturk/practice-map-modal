@@ -31,17 +31,20 @@ const modalStyles = {
 class App extends Component {
   constructor() {
     super();
+    this.defaultLocation = {
+      lng: -105.285884,
+      lat: 40.016457
+    };
+
     this.state = {
-      location: {
-        lng: -105.285884,
-        lat: 40.016457
-      },
+      location: this.defaultLocation,
       condition: '',
       temp: '',
       summary: '',
       loaded: false,
       modalIsOpen: false
     };
+
 
     this.setOpenModal = this.setOpenModal.bind(this);
     this.setCloseModal = this.setCloseModal.bind(this);
@@ -98,6 +101,7 @@ class App extends Component {
       return {
         'backgroundImage': `url(${this.getImage()})`,
         'backgroundSize': 'cover',
+        'backgroundPosition': 'bottom',
         'repeat': 'noRepeat'
       }
     };
@@ -129,7 +133,10 @@ class App extends Component {
           <div onClick={() => this.setCloseModal()}>{icons.closeIcon}</div>
         </Modal>
         <header className='App-header'>
-          <h1 className='App-logo'>Lemonade <div className='App-logoIcon'>{icons.compass}</div> Weather</h1>
+          <div className='App-logo'>
+            <h1 className='App-logoName'>Lemonade Weather</h1>
+            <div className='App-logoIcon'>{icons.compass}</div>
+          </div>
           <CurrentConditions condition={this.state.condition}
             summary={this.state.summary}
             temp={this.state.temp} />
@@ -137,8 +144,9 @@ class App extends Component {
         <img className='hidden'
           onLoad={this.setLoad.bind(this)}
           src={this.getImage()}
-          alt={`landscape with ${this.state.condition}`}/>
-        <Map setNewLocation={this.setNewLocation.bind(this)} defaultLocation={this.state.location}/>
+          alt={`landscape with ${this.state.condition} weather`}/>
+        <Map setNewLocation={this.setNewLocation.bind(this)}
+             currentLocation={this.state.location} />
       </div>
     )
   }
