@@ -5,26 +5,28 @@ import './App.css';
 import CurrentConditions from './CurrentConditions';
 import Map from './Map.js';
 import MapDirections from './MapDirections'
-import fetchConditions from './helpers/fetch_helper';
+import LocationSearch from './LocationSearch'
+import fetchConditions from './helpers/weatherFetch_helper';
+import fetchLocations from './helpers/mapFetch_helper';
 import * as images from './helpers/image_helper';
 import * as icons from './helpers/icon_helper';
 
 const modalStyles = {
-  overlay : {
-    position          : 'fixed',
-    top               : 0,
-    left              : 0,
-    right             : 0,
-    bottom            : 0,
-    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.75)'
   },
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
@@ -44,17 +46,13 @@ class App extends Component {
       loaded: false,
       modalIsOpen: false
     };
-
-
-    this.setOpenModal = this.setOpenModal.bind(this);
-    this.setCloseModal = this.setCloseModal.bind(this);
   }
 
-  setOpenModal() {
+  setOpenModal = () => {
     this.setState({modalIsOpen: true});
   }
 
-  setCloseModal() {
+  setCloseModal = () => {
     this.setState({modalIsOpen: false});
   }
 
@@ -107,17 +105,24 @@ class App extends Component {
     };
   }
 
-  setLoad() {
+  setLoad = () => {
     this.setState({
       loaded: true
     });
   }
 
-  getImage() {
+  getImage = () => {
     const url = Object.keys(images).find(key => {
       return key === this.state.condition
     });
     return images[url]
+  }
+
+  handleSearch = (locationQuery) => {
+    fetchLocations(locationQuery)
+    .then(locationObject => {
+      this.setNewLocation(locationObject)
+    })
   }
 
   render () {
@@ -137,12 +142,13 @@ class App extends Component {
             <h1 className='App-logoName'>Lemonade Weather</h1>
             <div className='App-logoIcon'>{icons.compass}</div>
           </div>
+          <LocationSearch handleSearch={this.handleSearch}/>
           <CurrentConditions condition={this.state.condition}
             summary={this.state.summary}
             temp={this.state.temp} />
         </header>
         <img className='hidden'
-          onLoad={this.setLoad.bind(this)}
+          onLoad={this.setLoad}
           src={this.getImage()}
           alt={`landscape with ${this.state.condition} weather`}/>
         <Map setNewLocation={this.setNewLocation.bind(this)}
