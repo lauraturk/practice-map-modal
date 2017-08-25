@@ -11,10 +11,12 @@ async function fetchLocations(location) {
   })
 
   let newLocation = await locationResponse.json()
+  console.log(newLocation);
 
   return {
     lat: newLocation.features[0].center[1],
     lng: newLocation.features[0].center[0],
+    locationName: newLocation.features[0].place_name
   }
 }
 

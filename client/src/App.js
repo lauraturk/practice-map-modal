@@ -40,6 +40,7 @@ class App extends Component {
 
     this.state = {
       location: this.defaultLocation,
+      locationName: 'Boulder, CO',
       condition: '',
       temp: '',
       summary: '',
@@ -71,12 +72,14 @@ class App extends Component {
   }
 
   setNewLocation(location) {
-    fetchConditions(location)
+    const {lng, lat, locationName} = location
+
+    fetchConditions({lng, lat})
     .then(conditionObject => {
       const { condition, temp, summary } = conditionObject
-
       if(this.state.condition !== condition) {
         this.setState({
+          locationName,
           location,
           condition,
           temp,
@@ -85,6 +88,7 @@ class App extends Component {
         });
       } else {
         this.setState({
+          locationName,
           location,
           condition,
           temp,
@@ -143,6 +147,7 @@ class App extends Component {
             <div className='App-logoIcon'>{icons.compass}</div>
           </div>
           <LocationSearch handleSearch={this.handleSearch}/>
+          {this.state.locationName}
           <CurrentConditions condition={this.state.condition}
             summary={this.state.summary}
             temp={this.state.temp} />
