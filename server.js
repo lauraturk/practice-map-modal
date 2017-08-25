@@ -31,6 +31,23 @@ app.post('/api/v1/current_temp', (req, res) => {
   .catch(error => console.log(error))
 });
 
+app.post('/api/v1/map_location', (req, res) => {
+  const city = req.body.city;
+  const state = req.body.state;
+
+  fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${city}%20${state}.json?access_token=${process.env.MAP_BOX}`, {
+    method: 'GET',
+  })
+  .then(response => {
+    if(response.ok) {
+      return response.json()
+    }
+    res.send(404).json({error: 'error fetching from forward geocoding'})
+  })
+  .then(jsonData => res.send(jsonData))
+  .catch(error => console.log(error))
+});
+
 app.listen(app.get('port'), () => {
   console.log(`app running on 3001`)
 });
